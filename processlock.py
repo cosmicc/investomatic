@@ -1,13 +1,14 @@
 import os
 import sys
+from socket import gethostname
 
 import fcntl
 from loguru import logger as log
-from modules.configreader import hstname
 from pathlib import Path
 
 rundir = Path("/run")
 tmpdir = Path("/tmp")
+hstname = gethostname().upper()
 
 
 def cleanName(filename):

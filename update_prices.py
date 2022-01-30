@@ -1,12 +1,24 @@
+#!/usr/bin/env python3
+
+import logging
+import os
+import sys
 from datetime import datetime, timedelta
 from time import sleep
 
 import keys
+import logconfig
 import pandas as pd
 import sqlalchemy.types as sdt
+from binandata import Price
+from git import Repo
 from loguru import logger as log
-from modules.binandata import Price
+from processlock import PLock
 from sqlalchemy import create_engine, inspect
+
+loglevel = 'DEBUG'
+__progname__ = 'update_prices'
+__description__ = "Crypto Price Updater"
 
 
 def insert_do_nothing_on_conflicts(sqltable, conn, keys, data_iter):
@@ -24,6 +36,49 @@ def insert_do_nothing_on_conflicts(sqltable, conn, keys, data_iter):
     do_nothing_stmt = insert_stmt.on_conflict_do_nothing(index_elements=['open_time'])
     conn.execute(do_nothing_stmt)
 
+
+def gitupdatecheck():
+    log.debug(f'Checking for updates...')
+    localdir = keys.localdir
+    repo = Repo(localdir)
+    origin = repo.remotes.origin
+    origin.fetch()
+    if repo.head.commit != origin.refs[0].commit:
+        log.info(f'New version found. Updating and Restarting...')
+        origin.pull()
+        Popen(['restarter.py', '--exec', os.path.dirname(sys.argv[0])])
+    else:
+        log.debug('No updates found')
+
+
+def checkerrorlog(record):
+    if record["level"] == "WARNING" or record["level"] == "ERROR" or record["level"] == "CRITICAL":
+        return True
+    else:
+        return False
+
+
+log.remove()
+shortlogformat = "<level>{time:YYYY-MM-DD HH:mm:ss.SSS}</level><fg 248>|</fg 248><level>{level: <7}</level><fg 248>|</fg 248> <level>{message}</level>"
+longlogformat = "<level>{time:YYYY-MM-DD HH:mm:ss.SSS}</level><fg 248>|</fg 248> <level>{level: <7}</level> <fg 248>|</fg 248> <level>{message: <72}</level> <fg 243>|</fg 243> <fg 109>{name}:{function}:{line}</fg 109>"
+log.add(sys.stderr, level=loglevel, format=longlogformat)
+log.add(sink='/var/log/investomatic/error.log', level=40, buffering=1, enqueue=True, backtrace=True, diagnose=True, colorize=False, format=longlogformat, delay=False, filter=checkerrorlog)
+
+
+if loglevel == 'DEBUG':
+    logging.basicConfig(level=logging.DEBUG)
+elif loglevel == 'INFO':
+    logging.basicConfig(level=logging.INFO)
+elif loglevel == 'WARNING':
+    logging.basicConfig(level=logging.WARNING)
+
+
+processlock = PLock()
+processlock.lock()
+
+gitupdatecheck()
+
+log.info(f'*** {__description__} is starting with log level {loglevel} ***')
 
 coins = []
 log.debug(f'Starting sqlalchemy postgresql connection for positions check')
