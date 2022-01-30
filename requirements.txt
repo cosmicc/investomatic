@@ -1,0 +1,13 @@
+binance==0.3
+loguru==0.5.3
+matplotlib==3.5.1
+numpy==1.22.1
+pandas==1.4.0
+pandas_datareader==0.10.0
+plotly==5.5.0
+psycopg2==2.9.3
+python_binance==1.0.15
+requests==2.26.0
+scikit_learn==1.0.2
+SQLAlchemy==1.4.31
+tensorflow==2.7.0
