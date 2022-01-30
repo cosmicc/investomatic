@@ -1,0 +1,307 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"get",
+				"get_flexible_savings_balance"
+			],
+			[
+				"ap",
+				"api_secret"
+			],
+			[
+				"fin",
+				"final_dataframe"
+			],
+			[
+				"pred",
+				"prediction"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"sync",
+				"Sync Settings: Edit User Settings"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Remove Package"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 231.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/nvme_storage/Projects/stockpred/positions.py",
+		"/nvme_storage/Projects/stockpred/history.py",
+		"/nvme_storage/Projects/stockpred/binanobj.py",
+		"/nvme_storage/Projects/stockpred/data.py",
+		"/nvme_storage/Projects/stockpred/history_processor.py",
+		"/nvme_storage/Projects/stockpred/binance_Test.py",
+		"/nvme_storage/Projects/stockpred/update_prices.py",
+		"/nvme_storage/Projects/stockpred/postgresql.py",
+		"/nvme_storage/Projects/stockpred/main.py",
+		"/nvme_storage/Projects/stockpred/datetimes.py",
+		"/nvme_storage/Projects/stockpred/keys.py",
+		"/nvme_storage/Projects/stockpred/test.py",
+		"/nvme_storage/Projects/stockpred/plot.py",
+		"/home/ip/Downloads/JD2Setup_x64.sh",
+		"/home/ip/Downloads/supergrafx/links2.txt",
+		"/home/ip/Downloads/MAME 0.238 Software List ROMs (split)/_ReadMe_.txt",
+		"/home/ip/Downloads/fix_swl_string.py",
+		"/home/ip/Downloads/supergrafx/links.txt",
+		"/hdd_storage/Systems/Microsoft Windows 3.x (1990-1999)/games/!win3x/3DAtlas/3D Atlas '98 (1997).bat",
+		"/hdd_storage/Systems/Microsoft MS-DOS (1978-2004)/Games/!dos/$100000P/dosbox.conf",
+		"/home/ip/Desktop/Arcade.tigervnc",
+		"/mnt/games/steamapps/common/Valheim/valheim_Data/boot.config",
+		"/mnt/games/steamapps/common/Valheim/BepInEx/config/valheim_plus.cfg",
+		"/tmp/ark-WsDYNM/SEGA Model 2 Emulator v1.1a.dat",
+		"/home/ip/Downloads/supergrafx/wgerline.txt",
+		"/home/ip/GAMECUBE/links.txt",
+		"/home/ip/GAMECUBE/links2.txt",
+		"/var/lib/snapd/snap/core18/2128/etc/dbus-1/system.d/wpa_supplicant.conf",
+		"/hdd_storage/Systems/Microsoft Windows 3.x (1990-1999)/Win3xO Collection ReadMe.txt",
+		"/hdd_storage/Systems/Microsoft Windows 3.x (1990-1999)/games/!win3x/3DAtlas/install.bat",
+		"/home/ip/Downloads/HP-Stack-3800",
+		"/home/ip/Downloads/HP3800-DMZStack",
+		"/home/ip/Downloads/WAN-SWITCH",
+		"/home/ip/PS2/links2.txt",
+		"/home/ip/PS2/links.txt",
+		"/home/ip/Wii/links.txt",
+		"/home/ip/Downloads/zerodelay_x2.cfg",
+		"/run/user/1000/kio-fuse-gvNRsm/smb/arcade@172.25.200.21/ROMS/eXoWin3x/eXoWin3x ReadMe.txt",
+		"/home/ip/eXoWin3x/_ReadMe_.txt",
+		"/home/ip/eXoWin3x/eXoWin3x ReadMe.txt",
+		"/run/user/1000/kio-fuse-gvNRsm/smb/arcade@172.25.200.21/ROMS/eXoWin3x/Setup eXoWin3x.bat",
+		"/tmp/ark-DMMqIL/eXo/eXoDOS/!dos/$100000P/install.bat",
+		"/tmp/ark-wLfhPl/eXo/eXoDOS/!dos/$100000P/$100,000 Pyramid (1988).bat",
+		"/hdd_storage/Systems/Microsoft MS-DOS (1978-2004)/Games/!dos/$100000P/install.bat",
+		"/run/media/ip/rootfs/etc/wpa_supplicant/wpa_supplicant.conf",
+		"/run/media/ip/rootfs/usr/share/doc/wpasupplicant/examples/wpa_supplicant.conf",
+		"/run/media/ip/rootfs/usr/lib/dhcpcd/dhcpcd-hooks/10-wpa_supplicant",
+		"/run/media/ip/boot/octopi-network.txt",
+		"/run/media/ip/boot/octopi.txt",
+		"/run/media/ip/boot/config.txt",
+		"/run/media/ip/rootfs/etc/network/if-pre-up.d/wpasupplicant",
+		"/run/media/ip/rootfs/etc/network/interfaces",
+		"/run/media/ip/rootfs/etc/wpa_supplicant/action_wpa.sh",
+		"/run/media/ip/boot/octopi-wpa-supplicant.txt",
+		"/mnt/games/steamapps/common/Valheim/BepInEx/config/custom_raids.supplemental.ragnarok.cfg",
+		"/mnt/games/steamapps/common/Valheim/BepInEx/config/custom_raids.cfg",
+		"/mnt/games/steamapps/common/Valheim/BepInEx/config/org.bepinex.plugins.creaturelevelcontrol.cfg",
+		"/mnt/games/steamapps/common/Valheim/BepInEx/config/custom_raids.raids.cfg",
+		"/mnt/games/steamapps/common/Valheim/BepInEx/config/aedenthorn.ExtendedPlayerInventory.cfg",
+		"/mnt/games/steamapps/common/Valheim/BepInEx/plugins/CreatureConfig.yml",
+		"/home/ip/Downloads/nigeria-aes-256-cbc-udp-dns.ovpn",
+		"/home/ip/snap/electronplayer/9/.config/electronplayer/config.json",
+		"/home/ip/Downloads/venezuela-aes-256-cbc-udp-dns.ovpn",
+		"/home/ip/Documents/PLUG/config/valheim_plus.cfg",
+		"/home/ip/Downloads/us_chicago-aes-256-cbc-udp-dns.ovpn",
+		"/home/ip/Downloads/us-newjersey-aes-256-cbc-udp-dns.ovpn",
+		"/home/ip/Downloads/firewall-UDP4-1198-netmon1-config.ovpn",
+		"/home/ip/Downloads/firewall-UDP4-1198-lsec.io-config.ovpn",
+		"/home/ip/Downloads/ca_toronto-aes-256-cbc-udp-dns.ovpn",
+		"/home/ip/Desktop/Arcade",
+		"/mnt/games/steamapps/common/Valheim/BepInEx/config/custom_raids.supplemental.skeletonambush.cfg",
+		"/mnt/games/steamapps/common/Valheim/BepInEx/config/custom_raids.supplemental.wolfambush.cfg",
+		"/mnt/games/steamapps/common/Valheim/BepInEx/config/custom_raids.supplemental.boarambush.cfg",
+		"/mnt/games/steamapps/common/Valheim/BepInEx/config/custom_raids.supplemental.greydwarfambush.cfg",
+		"/mnt/games/steamapps/common/Valheim/BepInEx/config/custom_raids.supplemental.spiritwolf.cfg",
+		"/mnt/games/steamapps/common/Valheim/BepInEx/config/aedenthorn.ClockMod.cfg",
+		"/mnt/games/steamapps/common/Valheim/BepInEx/config/com.lvh-it.valheim.useequipmentinwater.cfg",
+		"/mnt/games/steamapps/common/Valheim/BepInEx/config/randyknapp.mods.equipmentandquickslots.cfg",
+		"/mnt/games/steamapps/common/Valheim/BepInEx/config/ishid4.mods.betterarchery.cfg",
+		"/mnt/games/steamapps/common/Valheim/BepInEx/plugins/ItemConfig.yml",
+		"/mnt/games/steamapps/common/Valheim/BepInEx/CreatureConfig.yml",
+		"/mnt/games/steamapps/common/Valheim/BepInEx/config/com.bkeyes93.PlantingPlus.cfg",
+		"/mnt/games/steamapps/common/Valheim/BepInEx/config/BepInEx.cfg",
+		"/mnt/games/steamapps/common/Valheim/BepInEx/config/MK_BetterUI.cfg",
+		"/mnt/games/steamapps/common/Valheim/BepInEx/config/randyknapp.mods.epicloot.cfg",
+		"/mnt/games/steamapps/common/Valheim/BepInEx/config/org.tonsit.interactwhilebuilding.cfg",
+		"/mnt/games/steamapps/common/Valheim/BepInEx/config/Custom_Raids.cfg",
+		"/mnt/games/steamapps/common/Valheim/BepInEx/config/ItemConfig.yml",
+		"/mnt/games/steamapps/common/Valheim/BepInEx/config/CreatureConfig.yml",
+		"/mnt/games/steamapps/common/Valheim/BepInEx/config/aedenthorn.CraftFromContainers.cfg",
+		"/home/ip/Downloads/Teoma Systems_iperry_New Teoma SECURE GPO Install_2020-02-12T06_00_20_3492914704697808583.txt",
+		"/opt/rtl8812au/docs/hostapd.conf",
+		"/run/media/ip/E3E7-6660/1MS.txt",
+		"/opt/rtl8812au/docs/REALTEK_README.txt",
+		"/mnt/files/desktop.ini",
+		"/mnt/files/ISO Images/Keys.txt",
+		"/run/media/ip/2801-0022/1test.txt",
+		"/nvme_storage/VMs/MacOS Catalina/MacOS Catalina.vbox",
+		"/nvme_storage/Code for VirtualBox.txt",
+		"/nvme_storage/Mac Resolution.txt",
+		"/opt/vivaldi/features.json",
+		"/opt/vivaldi/vk_swiftshader_icd.json",
+		"/opt/vivaldi/LICENSE.html",
+		"/opt/rtl8812au/0001-Allow-inject-management-and-control-frames.txt",
+		"/opt/rtl8812au/Kconfig",
+		"/opt/rtl8812au/README.md",
+		"/opt/rtl8812au/Makefile",
+		"/opt/rtl8812au/LICENSE",
+		"/home/ip/.config/sublime-text/Packages/User/SyncSettings.sublime-settings",
+		"/etc/fstab",
+		"/home/ip/.config/sublime-text/Packages/Sync Settings/SyncSettings.sublime-settings",
+		"/home/ip/.sync_settings/sync.log",
+		"/home/ip/go/src/hello/hello.go",
+		"/run/media/ip/SSD Storage/CircuitPython/ir_main.py",
+		"/run/media/ip/SSD Storage/CircuitPython/ir2_main.py",
+		"/home/ip/.config/sublime-text/Packages/Anaconda/Anaconda.sublime-settings",
+		"/home/ip/.config/sublime-text/Packages/User/Anaconda.sublime-settings"
+	],
+	"find":
+	{
+		"height": 32.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"scrollbar_highlights": true,
+		"show_context": true,
+		"use_buffer2": true,
+		"use_gitignore": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 32.0
+	},
+	"input":
+	{
+		"height": 44.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "Packages/Python 3/Python3.sublime-build",
+	"project": "Pipfile.sublime-project",
+	"replace":
+	{
+		"height": 60.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 238.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
