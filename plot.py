@@ -1,6 +1,5 @@
-import plotly.offline as py
 import plotly.graph_objs as go
-
+import plotly.offline as py
 from data import binance_price
 
 ticker = 'ATOMUSDT'

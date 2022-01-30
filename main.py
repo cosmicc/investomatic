@@ -1,13 +1,12 @@
-import numpy as np
-import matplotlib.pyplot as plt
-import pandas as pd
-import pandas_datareader as web
 import datetime as dt
 
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import pandas_datareader as web
 from sklearn.preprocessing import MinMaxScaler
+from tensorflow.keras.layers import LSTM, Dense, Dropout
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense, Dropout, LSTM
-
 
 # Load Data
 company = 'AAPL'

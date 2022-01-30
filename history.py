@@ -1,7 +1,7 @@
-from sqlalchemy import create_engine
-from loguru import logger as log
-import pandas as pd
 import keys
+import pandas as pd
+from loguru import logger as log
+from sqlalchemy import create_engine
 
 table = 'history'
 

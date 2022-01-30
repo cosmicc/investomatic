@@ -114,7 +114,7 @@ if __name__ == "__main__":
 
     #earn_products = get_all_earn_products()
     #print("There are", len(earn_products), "subscribable earn products.\n")
-    #print("The first two of them are:\n\n",
+    # print("The first two of them are:\n\n",
     #      json.dumps(earn_products[0:2], indent=2))
     bal = get_flexible_savings_balance('ATOM')
     print(bal)

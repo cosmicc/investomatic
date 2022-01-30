@@ -1,8 +1,9 @@
-from binance.client import Client
 from datetime import datetime, timedelta
-from pandas import DataFrame as df
-from loguru import logger as log
+
 import keys
+from binance.client import Client
+from loguru import logger as log
+from pandas import DataFrame as df
 
 
 class Price:

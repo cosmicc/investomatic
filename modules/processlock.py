@@ -1,11 +1,10 @@
-import fcntl
 import os
 import sys
-from pathlib import Path
 
+import fcntl
 from loguru import logger as log
-
 from modules.configreader import hstname
+from pathlib import Path
 
 rundir = Path("/run")
 tmpdir = Path("/tmp")

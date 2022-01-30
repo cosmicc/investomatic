@@ -1,12 +1,13 @@
-from binance.client import Client
-import keys
-from pandas import DataFrame as df
-from data import Price
 from time import sleep
-from loguru import logger as log
-from sqlalchemy import create_engine
-import pandas as pd
+
+import keys
 import numpy as np
+import pandas as pd
+from binance.client import Client
+from loguru import logger as log
+from modules.binandata import Price
+from pandas import DataFrame as df
+from sqlalchemy import create_engine
 
 client = Client(api_key=keys.api_key, api_secret=keys.api_secret)
 

@@ -1,11 +1,12 @@
-from sqlalchemy import create_engine, inspect
-import sqlalchemy.types as sdt
 from datetime import datetime, timedelta
-from data import Price
-from loguru import logger as log
-import pandas as pd
 from time import sleep
+
 import keys
+import pandas as pd
+import sqlalchemy.types as sdt
+from loguru import logger as log
+from modules.binandata import Price
+from sqlalchemy import create_engine, inspect
 
 
 def insert_do_nothing_on_conflicts(sqltable, conn, keys, data_iter):

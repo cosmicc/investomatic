@@ -1,7 +1,9 @@
-import psycopg2
 from sys import exit
+
 import keys
+import psycopg2
 from loguru import logger as log
+
 
 def create_table(sym):
 

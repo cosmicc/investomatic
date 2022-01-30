@@ -1,6 +1,6 @@
-from sqlalchemy import create_engine
-from loguru import logger as log
 import keys
+from loguru import logger as log
+from sqlalchemy import create_engine
 
 table = 'positions'
 
