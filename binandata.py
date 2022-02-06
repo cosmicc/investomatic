@@ -114,7 +114,7 @@ class Price:
             final_dataframe = final_dataframe.join(candles_data_frame)
             final_dataframe.columns = ['open_time', 'close_time', 'open', 'high', 'low', 'close', 'volume', 'asset_volume', 'trades', 'taker_buy_base', 'taker_buy_quote']
             final_dataframe.set_index('open_time', inplace=True)
-            log.info(f'Retrieval of price data for [{ticker}] from binance complete')
+            log.success(f'Retrieval of price data for [{ticker}] from binance complete')
             return final_dataframe
         except Exception as error:
             log.critical(f'Ticker feeder error: {error}')

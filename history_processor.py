@@ -81,7 +81,7 @@ for index, value in history_table.iterrows():
                 values = (position_table.loc[destcoin]["shares"] + destqty)
                 db.execute(update_string, values)
 
-        upd_string = f"""UPDATE history SET processed = True"""
+        upd_string = f"""UPDATE history SET processed = True WHERE timestamp = {value["timestamp"]}"""
         db.execute(upd_string)
     else:
         log.debug(f'Skipping history entry already marked processed: {value["timestamp"]}')

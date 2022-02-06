@@ -7,16 +7,15 @@ from datetime import datetime, timedelta
 from time import sleep
 
 import keys
-import logconfig
 import pandas as pd
 import sqlalchemy.types as sdt
 from binandata import Price
-from git import Repo
 from loguru import logger as log
 from processlock import PLock
 from sqlalchemy import create_engine, inspect
+from utils import gitupdatecheck
 
-loglevel = 'DEBUG'
+__loglevel__ = 'INFO'
 __progname__ = 'update_prices'
 __description__ = "Crypto Price Updater"
 
@@ -37,20 +36,6 @@ def insert_do_nothing_on_conflicts(sqltable, conn, keys, data_iter):
     conn.execute(do_nothing_stmt)
 
 
-def gitupdatecheck():
-    log.debug(f'Checking for updates...')
-    localdir = keys.localdir
-    repo = Repo(localdir)
-    origin = repo.remotes.origin
-    origin.fetch()
-    if repo.head.commit != origin.refs[0].commit:
-        log.info(f'New version found. Updating and Restarting...')
-        origin.pull()
-        Popen(['restarter.py', '--exec', os.path.dirname(sys.argv[0])])
-    else:
-        log.debug('No updates found')
-
-
 def checkerrorlog(record):
     if record["level"] == "WARNING" or record["level"] == "ERROR" or record["level"] == "CRITICAL":
         return True
@@ -59,26 +44,28 @@ def checkerrorlog(record):
 
 
 log.remove()
+log.level("START", no=38, color="<fg 39>", icon="¤")
 shortlogformat = "<level>{time:YYYY-MM-DD HH:mm:ss.SSS}</level><fg 248>|</fg 248><level>{level: <7}</level><fg 248>|</fg 248> <level>{message}</level>"
 longlogformat = "<level>{time:YYYY-MM-DD HH:mm:ss.SSS}</level><fg 248>|</fg 248> <level>{level: <7}</level> <fg 248>|</fg 248> <level>{message: <72}</level> <fg 243>|</fg 243> <fg 109>{name}:{function}:{line}</fg 109>"
-log.add(sys.stderr, level=loglevel, format=longlogformat)
+log.add(sys.stderr, level=__loglevel__, format=longlogformat)
 log.add(sink='/var/log/investomatic/error.log', level=40, buffering=1, enqueue=True, backtrace=True, diagnose=True, colorize=False, format=longlogformat, delay=False, filter=checkerrorlog)
 
 
-if loglevel == 'DEBUG':
+if __loglevel__ == 'DEBUG':
     logging.basicConfig(level=logging.DEBUG)
-elif loglevel == 'INFO':
+elif __loglevel__ == 'INFO':
     logging.basicConfig(level=logging.INFO)
-elif loglevel == 'WARNING':
+elif __loglevel__ == 'WARNING':
     logging.basicConfig(level=logging.WARNING)
-
+elif __loglevel__ == 'ERROR':
+    logging.basicConfig(level=logging.WARNING)
 
 processlock = PLock()
 processlock.lock()
 
 gitupdatecheck()
 
-log.info(f'*** {__description__} is starting with log level {loglevel} ***')
+log.log('START', f'{__description__} is starting with log level [{__loglevel__}]')
 
 coins = []
 log.debug(f'Starting sqlalchemy postgresql connection for positions check')
@@ -127,7 +114,7 @@ for coin in coins:
                 taker_buy_quote  NUMERIC(24, 8) NOT NULL
             )"""
             db.execute(create_script)
-            log.info(f'Starting data backfill for [{coin}]')
+            log.info(f'Starting history data backfill for [{coin}]')
 
             ds = datetime(2018, 1, 1)
             de = datetime(2022, 1, 22)
@@ -141,6 +128,7 @@ for coin in coins:
                     log.info(f'Backfilling {dsstr} to {dtstr} for [{coin}] with {len(bc.index)} entries')
                     bc.to_sql(coin.lower(), db, if_exists='append', index=True, index_label='open_time', method=insert_do_nothing_on_conflicts)
                 ds = dt
+            log.success(f'Backfill history data for [{coin}] complete')
 
         else:
             log.debug(f'Table exists for [{coin}], skipping creation and data backfill')

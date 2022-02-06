@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 from binance.client import Client
 from loguru import logger as log
-from modules.binandata import Price
+from binandata import Price
 from pandas import DataFrame as df
 from sqlalchemy import create_engine
 
@@ -17,10 +17,11 @@ client = Client(api_key=keys.api_key, api_secret=keys.api_secret)
 # print(client.get_symbol_info('BTCUSDT'))
 
 
-info = client.get_account()
+#info = client.get_account()
+info = client.get_ticker()
 print(info)
-balances = info['balances']
-print(balances)
+#balances = info['balances']
+# print(balances)
 
 
 exit(0)
