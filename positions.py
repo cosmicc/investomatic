@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import keys
 from loguru import logger as log
 from sqlalchemy import create_engine

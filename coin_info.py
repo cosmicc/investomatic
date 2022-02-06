@@ -19,6 +19,7 @@ class CoinInfo:
         self.top200_table = 'top_200_info'
         self.coinbase = CoinMarketBase()
         self.positions = []
+        self.preload_tables = ['coin_info', 'positions', 'top_200_info']
         try:
             db_string = f'postgresql://{keys.username}:{keys.password}@{keys.hostname}:{keys.port}/personal'
             self.db = create_engine(db_string)
@@ -26,8 +27,13 @@ class CoinInfo:
         except Exception as error:
             log.critical(f'Error connecting to postgresql database: {error}')
             exit(1)
+        log.debug(f'Preloading tables into cache...')
+        for table in self.preload_tables:
+            preload_query = f"""SELECT pg_prewarm('{table}')"""
+            self.db.execute(preload_query)
+        log.debug('Preloading tables into cache complete')
 
-    def update_coin_info(self):
+    def update_coin_info(self, ticker=None):
         log.debug(f'Checking for table [{self.coininfo_table}] and creating if does not exist')
         create_script = f""" CREATE TABLE IF NOT EXISTS {self.coininfo_table.lower()} (
             symbol           VARCHAR(10) PRIMARY KEY NOT NULL UNIQUE,
@@ -64,6 +70,9 @@ class CoinInfo:
 
         for row in p:
             self.positions.append(row[0])
+
+        if ticker is not None:
+            self.positions.append(ticker.upper())
 
         for row in c:
             coininfo.append(row[0])
@@ -152,8 +161,7 @@ class CoinInfo:
                             self.db.execute(update_string, values)
 
     def update_latest_info(self):
-        log.info(f'Updating cryptocurrency info into [{self.top200_table}] table')
-        insert_string = f"""INSERT INTO {self.top200_table} (symbol, name, last_updated, cmc_rank, slug, id, circulating_supply, max_supply, market_pairs, total_supply, fully_diluted_market_cap, 
+        insert_string = f"""INSERT INTO {self.top200_table} (symbol, name, last_updated, cmc_rank, slug, id, circulating_supply, max_supply, market_pairs, total_supply, fully_diluted_market_cap,
                            market_cap, market_cap_dominance, price, percent_change_1h, percent_change_24h, percent_change_7d, percent_change_30d, percent_change_60d, percent_change_90d, volume_24h, volume_change_24h)
                            values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
 
@@ -165,7 +173,7 @@ class CoinInfo:
             last_info_update = self.db.execute(date_query)
             for f in last_info_update:
                 if f[0] > (datetime.now() - timedelta(days=1)):
-                    log.info(f'Data less then 24 hours old. Skipping refresh')
+                    log.info(f'Data less then 24 hours old. Skipping online refresh')
                     return True
             log.info(f'Data older then 24 hours, refreshing data')
             self.db.execute(f"""DROP TABLE {self.top200_table}""")
@@ -212,33 +220,79 @@ class CoinInfo:
                       cinfo['quote']['USD']['volume_24h'], cinfo['quote']['USD']['volume_change_24h'])
             self.db.execute(insert_string, values)
 
-    def get_info(self, ticker):
-        self.update_coin_info()
-        query_string = f"""SELECT * FROM {self.coininfo_table} WHERE symbol = '{ticker.upper()}'"""
-
-        coin_info = pd.read_sql_table(self.coininfo_table, self.db)
-        coin_info.set_index('symbol', inplace=True)
-        if row is not None:
-            log.warning(f'No info found for coin [{ticker.upper()}] in [{self.coininfo_table}]')
+    def get_info(self, ticker=None, id=None, slug=None):
+        if ticker is None and id is None and slug is None:
+            log.error(f'You must specify a symbol, id, or slug to seach for')
             return None
+        elif ticker is not None:
+            query_string = f"""SELECT * FROM {self.coininfo_table} WHERE symbol = '{ticker.upper()}'"""
+        elif id is not None:
+            query_string = f"""SELECT * FROM {self.coininfo_table} WHERE id = '{id}'"""
+        elif slug is not None:
+            query_string = f"""SELECT * FROM {self.coininfo_table} WHERE id = '{slug}'"""
+        if ticker is not None:
+            self.update_coin_info(ticker=ticker)
         else:
-            row = coin_info.loc[ticker.upper()].to_dict()
-            return row
-
-    def get_latest(self, ticker):
-        self.update_coin_info()
-        query_string = f"""SELECT * FROM {self.top200_table} WHERE symbol = '{ticker.upper()}'"""
-
-        coin_info = pd.read_sql_table(self.top200_table, self.db)
+            self.update_coin_info()
+        coin_info = pd.read_sql_table(self.coininfo_table, self.db)
         if coin_info is None:
-            log.warning(f'No info found for coin [{ticker.upper()}] in [{self.top200_table}]')
+            log.warning(f'No info found for coin [{ticker.upper()}] in [{self.coininfo_table}]')
             return None
         else:
             coin_info.set_index('symbol', inplace=True)
             row = coin_info.loc[ticker.upper()].to_dict()
             return row
 
+    def get_latest(self, ticker=None, id=None, slug=None, rank=None):
+        if ticker is None and id is None and slug is None and rank is None:
+            log.error(f'You must specify a [symbol], [id], [slug], or [rank] to seach for')
+            return None
+        elif ticker is not None:
+            self.update_latest_info()
+            log.info(f'Retreiving coin info for symbol: [{ticker.upper()}]')
+            coin_info = pd.read_sql_table(self.top200_table, self.db)
+            if coin_info is None:
+                log.warning(f'No info found for coin symbol [{ticker.upper()}] in [{self.top200_table}]')
+                return None
+            else:
+                coin_info.set_index('symbol', inplace=True)
+                row = coin_info.loc[ticker.upper()].to_dict()
+                return row
+        elif id is not None:
+            self.update_latest_info()
+            log.info(f'Retreiving coin info for id: [{id}]')
+            coin_info = pd.read_sql_table(self.top200_table, self.db)
+            if coin_info is None:
+                log.warning(f'No info found for coin id [{id}] in [{self.top200_table}]')
+                return None
+            else:
+                coin_info.set_index('id', inplace=True)
+                row = coin_info.loc[id].to_dict()
+                return row
+        elif slug is not None:
+            self.update_latest_info()
+            log.info(f'Retreiving coin info for slug: [{slug}]')
+            coin_info = pd.read_sql_table(self.top200_table, self.db)
+            if coin_info is None:
+                log.warning(f'No info found for coin slug [{slug}] in [{self.top200_table}]')
+                return None
+            else:
+                coin_info.set_index('slug', inplace=True)
+                row = coin_info.loc[slug].to_dict()
+                return row
+        elif rank is not None:
+            self.update_latest_info()
+            log.info(f'Retreiving coin info for rank: [#{rank}]')
+            coin_info = pd.read_sql_table(self.top200_table, self.db)
+            if coin_info is None:
+                log.warning(f'No info found for coin rank [#{rank}] in [{self.top200_table}]')
+                return None
+            else:
+                coin_info.set_index('cmc_rank', inplace=True)
+                row = coin_info.loc[rank].to_dict()
+                return row
+
 
 if __name__ == "__main__":
     coin = CoinInfo()
-    print(coin.get_latest('btc'))
+    print(coin.get_info(ticker='doge'))

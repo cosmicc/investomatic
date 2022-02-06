@@ -5,13 +5,12 @@ import sys
 from datetime import datetime
 
 import keys
-import numpy as np
 import pandas as pd
 import pytz
 from loguru import logger as log
 from processlock import PLock
 from sqlalchemy import create_engine, inspect
-from utils import elapsedTime, estconvert, gitupdatecheck
+from utils import elapsedTime, gitupdatecheck
 
 __loglevel__ = 'DEBUG'
 __progname__ = 'crypto_alertwatch'

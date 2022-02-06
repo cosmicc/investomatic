@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import keys
 import pandas as pd
 from loguru import logger as log
@@ -95,7 +97,7 @@ for index, value in position_table.iterrows():
         delete_string = f"""DELETE FROM positions WHERE symbol = %s"""
         vals = (index)
         db.execute(delete_string, vals)
-        drop_string = f"""DROP TABLE %s"""
-        jo = f'{index.lower}usdt'
-        vag = (jo)
-        db_feeder.execute(drop_string, vag)
+        #drop_string = f"""DROP TABLE %s"""
+        #jo = f'{index.lower}usdt'
+        #vag = (jo)
+        #db_feeder.execute(drop_string, vag)
